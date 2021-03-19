@@ -21,6 +21,7 @@
     <TextView
         android:id="@+id/mail"
         android:layout_marginBottom="20dp"
+
         android:layout_marginTop="20dp"
         android:layout_below="@id/textcontactus"
         android:layout_width="match_parent"
