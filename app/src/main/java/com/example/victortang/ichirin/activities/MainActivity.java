@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -30,16 +31,22 @@ public class MainActivity extends AppCompatActivity {
 
     private Button mContactUs;
     private Button mInformation;
+    private Button mValidation;
+    private String searchData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        EditText editText = (EditText) findViewById(R.id.search);
         ListView listView = (ListView) findViewById(R.id.data);
+
+
 
         mContactUs = findViewById(R.id.contactus);
         mInformation = findViewById(R.id.information);
+        mValidation = findViewById(R.id.validation);
 
         mContactUs.setOnClickListener(v -> {
             Intent contactActivity = new Intent(MainActivity.this, ContactUs.class);
@@ -51,12 +58,22 @@ public class MainActivity extends AppCompatActivity {
             startActivity(informationActivity);
         });
 
+        mValidation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchData=editText.getText().toString();
+                Toast.makeText(getBaseContext(), searchData, Toast.LENGTH_SHORT).show();
+            }
+        });
+
         MyAdapter adapter = new MyAdapter();
         listView.setAdapter(adapter);
 
         AsyncDrinks drinks = new AsyncDrinks(adapter);
 
+
         drinks.execute();
+
 
 
 

@@ -19,10 +19,42 @@
         android:textStyle="bold"
         />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/search"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:inputType="textMultiLine"
+            android:lines="1"
+            android:hint="Search"
+            android:maxLength="13"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp">
+        </EditText>
+
+        <Button
+            android:id="@+id/validation"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="@string/Valider"
+            />
+
+
+
+    </LinearLayout>
+
+
+
     <ListView
         android:id="@+id/data"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -53,8 +85,6 @@
             android:layout_width="200dp"
             android:layout_height="65dp"
             android:text="@string/information"
-
-
             />
     </LinearLayout>
 

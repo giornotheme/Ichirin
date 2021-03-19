@@ -1,7 +1,6 @@
 package com.example.victortang.ichirin.async;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.example.victortang.ichirin.activities.MainActivity;
 import com.example.victortang.ichirin.models.Drink;
@@ -23,7 +22,7 @@ import java.util.List;
 
 public class AsyncDrinks extends AsyncTask<Void, Void, List<Drink>> {
 
-    private MainActivity.MyAdapter adapter;
+    private final MainActivity.MyAdapter adapter;
 
     public AsyncDrinks(MainActivity.MyAdapter adapter) {
         this.adapter = adapter;
@@ -36,7 +35,7 @@ public class AsyncDrinks extends AsyncTask<Void, Void, List<Drink>> {
     }
 
     public void setLstDrink(List<Drink> lstDrink) {
-        this.lstDrink = lstDrink;
+        AsyncDrinks.lstDrink = lstDrink;
     }
 
     public void addDrinksToList(Drink drink){
@@ -46,8 +45,8 @@ public class AsyncDrinks extends AsyncTask<Void, Void, List<Drink>> {
     @Override
     protected List<Drink> doInBackground(Void... voids) {
 
-        URL urlReq = null;
-        JSONObject resJSON = null;
+        URL urlReq;
+        JSONObject resJSON;
 
         try {
             urlReq = new URL(Constants.APIurl);
@@ -56,7 +55,8 @@ public class AsyncDrinks extends AsyncTask<Void, Void, List<Drink>> {
             InputStream in = new BufferedInputStream(urlConnection.getInputStream());
             String s = StreamHandler.readStream(in);
             resJSON = new JSONObject(s);
-            Log.i("JFL", resJSON.toString());
+            //Afficher dans le logcat
+            //Log.i("JFL", resJSON.toString());
 
             JSONArray drinkArray = resJSON.getJSONArray("drinks");
 
@@ -71,11 +71,7 @@ public class AsyncDrinks extends AsyncTask<Void, Void, List<Drink>> {
             urlConnection.disconnect();
 
 
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
+        } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
         return lstDrink;
@@ -90,6 +86,8 @@ public class AsyncDrinks extends AsyncTask<Void, Void, List<Drink>> {
             adapter.notifyDataSetChanged();
         }
     }
+
+    //Afficher dans le logcat
 
     /*public void displayAllDrinks(){
 
