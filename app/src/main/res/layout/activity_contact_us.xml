@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.ContactUs">
+
+    <TextView
+        android:id="@+id/textcontactus"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/contact_us"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/mail"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/textcontactus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/mail"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/mail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tel"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        />
+
+    <LinearLayout
+        android:id="@+id/linearlayout"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/contactus"
+            android:layout_width="200dp"
+            android:layout_height="65dp"
+            android:text="@string/contact_us"
+            />
+
+        <Button
+            android:id="@+id/information"
+            android:layout_width="200dp"
+            android:layout_height="65dp"
+            android:text="@string/information"
+            />
+    </LinearLayout>
+
+
+</RelativeLayout>

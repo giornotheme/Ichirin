@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Ichirin</string>
+    <string name="ichirin">ichirin</string>
+    <string name="contact_us">Nous contacter</string>
+    <string name="information">Informations</string>
+    <string name="mail">ichrin123@randomail.com</string>
+    <string name="tel">0123456789</string>
+</resources>
