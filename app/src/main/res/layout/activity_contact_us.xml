@@ -6,17 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".activities.ContactUs">
 
-    <TextView
-        android:id="@+id/textcontactus"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/contact_us"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        />
+
 
     <TextView
         android:id="@+id/mail"
