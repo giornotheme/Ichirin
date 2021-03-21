@@ -1,6 +1,9 @@
 package com.example.victortang.ichirin.async;
 
 import android.os.AsyncTask;
+import android.util.Log;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.victortang.ichirin.activities.MainActivity;
 import com.example.victortang.ichirin.models.Drink;
@@ -22,27 +25,38 @@ import java.util.List;
 
 public class AsyncDrinks extends AsyncTask<Void, Void, List<Drink>> {
 
+    String searchVerification;
+
     private final MainActivity.MyAdapter adapter;
 
-    public AsyncDrinks(MainActivity.MyAdapter adapter) {
+    public AsyncDrinks(MainActivity.MyAdapter adapter, String search) {
         this.adapter = adapter;
+        this.searchVerification = search;
+        Log.i("search",searchVerification);
     }
 
-    static public List<Drink> lstDrink = new ArrayList<>();
+    public List<Drink> lstDrink = new ArrayList<>();
 
     public List<Drink> getLstDrink() {
         return lstDrink;
     }
 
+
     public void setLstDrink(List<Drink> lstDrink) {
-        AsyncDrinks.lstDrink = lstDrink;
+        lstDrink = lstDrink;
     }
 
     public void addDrinksToList(Drink drink){
-        AsyncDrinks.lstDrink.add(drink);
+        lstDrink.add(drink);
     }
 
-    @Override
+    public void searchMatchesList(String string, List<Drink> lstDrink, Drink drink){
+        if (drink.getDrinkTitle().contains(string)) {
+            lstDrink.add(drink);
+        }
+    }
+
+        @Override
     protected List<Drink> doInBackground(Void... voids) {
 
         URL urlReq;
@@ -50,6 +64,7 @@ public class AsyncDrinks extends AsyncTask<Void, Void, List<Drink>> {
 
         try {
             urlReq = new URL(Constants.APIurl);
+            Log.i("url",urlReq.toString());
             HttpURLConnection urlConnection = (HttpURLConnection) urlReq.openConnection();
 
             InputStream in = new BufferedInputStream(urlConnection.getInputStream());
@@ -65,9 +80,16 @@ public class AsyncDrinks extends AsyncTask<Void, Void, List<Drink>> {
                 temp.setDrinkTitle(drinkArray.getJSONObject(i).getString("strDrink"));
                 temp.setDrinkInstruction(drinkArray.getJSONObject(i).getString("strInstructions"));
                 temp.setDrinkImage(drinkArray.getJSONObject(i).getString("strDrinkThumb"));
-                AsyncDrinks.lstDrink.add(temp);
-            }
 
+
+                if (searchVerification.isEmpty()) {
+                    lstDrink.add(temp);
+                    Log.i("Contient", temp.getDrinkTitle());
+                }
+                else if (temp.getDrinkTitle().contains(searchVerification)) {
+                    lstDrink.add(temp);
+                }
+            }
             urlConnection.disconnect();
 
 
@@ -80,10 +102,11 @@ public class AsyncDrinks extends AsyncTask<Void, Void, List<Drink>> {
     protected void onPostExecute(List<Drink> lstDrink){
         //this.displayAllDrinks();
         if(lstDrink!=null) {
-            for (int i = 0; i < AsyncDrinks.lstDrink.size(); i++) {
+            for (int i = 0; i < lstDrink.size(); i++) {
                 adapter.dd(lstDrink.get(i));
             }
             adapter.notifyDataSetChanged();
+            //searchMatchesList(lstDrink, "Blue");
         }
     }
 

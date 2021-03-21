@@ -24,15 +24,14 @@ import com.example.victortang.ichirin.R;
 import com.example.victortang.ichirin.async.AsyncDrinks;
 import com.example.victortang.ichirin.models.Drink;
 
-import java.util.Vector;
-
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button mContactUs;
     private Button mInformation;
     private Button mValidation;
-    private String searchData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +41,11 @@ public class MainActivity extends AppCompatActivity {
         EditText editText = (EditText) findViewById(R.id.search);
         ListView listView = (ListView) findViewById(R.id.data);
 
+        MyAdapter adapter = new MyAdapter();
+        listView.setAdapter(adapter);
 
+
+        new AsyncDrinks(adapter,editText.getText().toString()).execute();
 
         mContactUs = findViewById(R.id.contactus);
         mInformation = findViewById(R.id.information);
@@ -59,29 +62,25 @@ public class MainActivity extends AppCompatActivity {
         });
 
         mValidation.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                searchData=editText.getText().toString();
-                Toast.makeText(getBaseContext(), searchData, Toast.LENGTH_SHORT).show();
+
+                if (listView.getAdapter().getCount() != 0){
+                    MyAdapter ad = (MyAdapter) listView.getAdapter();
+                    ad.vector.clear();
+                    ad.notifyDataSetChanged();
+                }
+                AsyncDrinks drinks = new AsyncDrinks(adapter,editText.getText().toString());
+                drinks.execute();
             }
         });
-
-        MyAdapter adapter = new MyAdapter();
-        listView.setAdapter(adapter);
-
-        AsyncDrinks drinks = new AsyncDrinks(adapter);
-
-
-        drinks.execute();
-
-
-
 
     }
 
     public class MyAdapter extends BaseAdapter {
         //a vector that store all url
-        Vector<Drink> vector = new Vector<>();
+        List<Drink> vector = new ArrayList<>();
 
         //return the number of url in vector
         @Override
@@ -99,6 +98,9 @@ public class MainActivity extends AppCompatActivity {
             return 0;
         }
 
+        public List<Drink> getVector() {
+            return vector;
+        }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
