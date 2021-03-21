@@ -7,12 +7,12 @@
     tools:context=".activities.ContactUs">
 
     <TextView
-        android:id="@+id/textcontactus"
+        android:id="@+id/textinformation"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/contact_us"
+        android:text="@string/information"
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -22,27 +22,19 @@
         android:id="@+id/mail"
         android:layout_marginBottom="20dp"
 
-        android:layout_marginTop="20dp"
-        android:layout_below="@id/textcontactus"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_below="@id/textinformation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/mail"
+        android:text="@string/Description"
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold"
         />
 
-    <TextView
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_below="@id/mail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/tel"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        />
+
 
     <LinearLayout
         android:id="@+id/linearlayout"
